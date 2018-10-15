@@ -23,7 +23,14 @@
 	{%- endif %}
 	<script>
 		$(document).ready(function() {
-			$("#table").DataTable({{ datatable_options | safe }});
+			$("#table").DataTable({
+				{ datatable_options | safe };
+				"createdRow": function( row, data, dataIndex ) {
+					if ( data[1] == "tls12" ) {        
+						$(row).addClass('dt-row-color_red');
+					}
+				}
+			});
 		});
 	</script>
 	<style>
@@ -230,6 +237,10 @@
 
 		.dt-button-info h2 {
 			display: none;
+		}
+
+		.dt-row-color_red {
+			background-color: red
 		}
 </body>
 </html>
