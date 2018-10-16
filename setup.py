@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-_version = "2.1.1"
+_version = "2.1.2"
 
 setup(
     name="csvtotable",
@@ -14,8 +14,6 @@ setup(
     url="https://github.com/vividvilla/csvtotable",
     packages=["csvtotable"],
     include_package_data=True,
-    download_url="https://github.com/vividvilla/csvtotable/archive/{}.tar.gz"
-        .format(_version),
     license="MIT",
     classifiers=[
         "Development Status :: 4 - Beta",

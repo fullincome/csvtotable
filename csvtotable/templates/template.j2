@@ -23,14 +23,18 @@
 	{%- endif %}
 	<script>
 		$(document).ready(function() {
-			$("#table").DataTable({
-				{ datatable_options | safe };
-				"createdRow": function( row, data, dataIndex ) {
-					if ( data[1] == "tls12" ) {        
-						$(row).addClass('dt-row-color_red');
-					}
-				}
-			});
+			vat mydraw = function( row, data, dataIndex ) {
+	             if ( /^\ *(?:fail|error|no)\ *$/i.test(data[data.length - 1]) ) {        
+	         		$(row).addClass('dt-row-color_red');
+			     
+			      }
+			      if (/^\ *(?:pass|ok|yes)\ *$/i.test(data[data.length - 1]) ) {        
+	         		$(row).addClass('dt-row-color_green');
+			     
+			      }
+
+			};
+			$("#table").DataTable({{ datatable_options | safe }});
 		});
 	</script>
 	<style>
@@ -191,7 +195,7 @@
 
 		#table_wrapper table td {
 			border-bottom: 1px solid #ccc;
-			color: #669;
+			color: rgb(0, 0, 0);
 			padding: 6px 8px;
 		}
 
@@ -240,7 +244,11 @@
 		}
 
 		.dt-row-color_red {
-			background-color: red
+			background-color: rgba(250, 10, 10, 0.4);
+		}
+
+		.dt-row-color_green {
+			background-color: rgba(155, 238, 140, 0.7);
 		}
 </body>
 </html>
