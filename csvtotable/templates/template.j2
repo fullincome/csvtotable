@@ -23,18 +23,18 @@
 	{%- endif %}
 	<script>
 		$(document).ready(function() {
-			vat mydraw = function( row, data, dataIndex ) {
-	             if ( /^\ *(?:fail|error|no)\ *$/i.test(data[data.length - 1]) ) {        
-	         		$(row).addClass('dt-row-color_red');
-			     
-			      }
-			      if (/^\ *(?:pass|ok|yes)\ *$/i.test(data[data.length - 1]) ) {        
-	         		$(row).addClass('dt-row-color_green');
-			     
-			      }
+			var table = $("#table").DataTable({{ datatable_options | safe }});
 
-			};
-			$("#table").DataTable({{ datatable_options | safe }});
+			table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+				var data = this.data();
+				var row_node = this.node();
+				if ( /^\ *(?:fail|error|no)\ *$/i.test(data[data.length - 1]) ) {        
+					$(row_node).addClass('dt-row-color_red'); 
+				}
+				if (/^\ *(?:pass|ok|yes)\ *$/i.test(data[data.length - 1]) ) {        
+					$(row_node).addClass('dt-row-color_green');
+				}
+			});
 		});
 	</script>
 	<style>
